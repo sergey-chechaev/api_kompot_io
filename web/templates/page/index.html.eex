@@ -1,0 +1,14 @@
+<div id="messages">
+
+<%= for test_ws <- @test_ws do %>
+<p> <%= test_ws.title %></p>
+<% end %>
+
+</div>
+<input id="chat-input" type="text"></input>
+
+  </div> <!-- /container -->
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  <script>require("web/static/js/app")</script>
+</body>
