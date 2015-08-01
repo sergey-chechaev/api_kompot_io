@@ -13,9 +13,8 @@ defmodule ApiKompot.V1.MetricController do
 
   def create(conn, %{"metric" => metric_params}) do
     changeset = Metric.changeset(%Metric{}, metric_params)
-
     # Phoenix.Channel.broadcast "messages", "rooms:lobby", %{ body: metric_params }
-    # ApiKompot.Endpoint.broadcast! "rooms:lobby", "new_msg", %{body: 11}
+    ApiKompot.Endpoint.broadcast! "rooms:lobby", "new_msg", %{body: metric_params["name"]}
     case Repo.insert(changeset) do
       {:ok, metric} ->
         render(conn, "show.json", metric: metric)
