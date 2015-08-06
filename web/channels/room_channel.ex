@@ -2,6 +2,7 @@ defmodule ApiKompot.RoomChannel do
   use Phoenix.Channel
 
   alias ApiKompot.TestWs
+  alias ApiKompot.Metric
 
   def join("rooms:lobby", auth_msg, socket) do
     {:ok, socket}
@@ -13,8 +14,9 @@ defmodule ApiKompot.RoomChannel do
 
   def handle_in("new_msg", %{"body" => body}, socket) do
     broadcast! socket, "new_msg", %{body: body}
-    params = %{title: body}
-    changes = TestWs.changeset(%TestWs{}, params)
+    params = %{name: body}
+    # changes = TestWs.changeset(%TestWs{}, params)
+    changes = Metric.changeset(%Metric{}, params)
     ApiKompot.Repo.insert(changes)
     {:noreply, socket}
   end

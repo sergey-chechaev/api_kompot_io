@@ -1,7 +1,7 @@
 <div id="messages">
 
 <%= for test_ws <- @test_ws do %>
-<p> <%= test_ws.title %></p>
+<p> <%= test_ws.name %></p>
 <% end %>
 
 </div>
